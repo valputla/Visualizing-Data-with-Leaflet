@@ -80,6 +80,18 @@ L.control.layers(baseMaps, overlayMaps, {
 
 
 
+function getColor(d) {
+  return d > 3.0 ? '#810f7c' :
+         d > 2.0  ? '#8856a7' :
+         d > 1.5  ? '#8c96c6' :
+         d > 1.0  ? '#9ebcda' :
+         d > 0.5   ? '#bfd3e6' :
+                    '#edf8fb';
+}
+
+
+
+
 
 // var queryUrl = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2021-01-01&endtime=2021-01-02&maxlongitude=-69.52148437&minlongitude=-123.83789062&maxlatitude=48.74894534&minlatitude=25.16517337";
 var queryUrl  = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
@@ -95,7 +107,11 @@ d3.json(queryUrl).then(function(data) {
   geojsonLayer = L.geoJSON(data, {
     style: function(feature) {
       return {
-        color: "green"
+        fillColor: getColor(feature.properties.mag),
+        weight: 2,
+        opacity: 1,
+        color: 'grey',
+        fillOpacity: 0.7
       };
     },
     pointToLayer: function(feature, latlng) {
