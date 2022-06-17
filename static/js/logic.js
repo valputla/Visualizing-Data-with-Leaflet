@@ -20,10 +20,6 @@
       "</h3><hr>Magnitude: " + feature.properties.mag);
   }
 
-//   function popUpMsg(feature, layer) {
-//     layer.bindPopup("<h3>" + feature.properties.place +
-//       "</h3><hr>Magnitude: " + feature.properties.mag);
-//   }
 
 
 
@@ -96,15 +92,27 @@ d3.json(queryUrl).then(function(data) {
 
   // Create a GeoJSON layer containing the features array on the earthquakeData object
   // Run the onEachFeature function once for each piece of data in the array
-  L.geoJSON(data, {
-    onEachFeature: popUpMsg
+  geojsonLayer = L.geoJSON(data, {
+    style: function(feature) {
+      return {
+        color: "green"
+      };
+    },
+    pointToLayer: function(feature, latlng) {
+      return new L.CircleMarker(latlng, {
+        radius: 10, 
+        fillOpacity: 0.85
+      });
+  },
+    onEachFeature: popUpMsg,
+    
   }).addTo(earthquakes);
 
   // Here are some additional examples:  https://geospatialresponse.wordpress.com/2015/07/26/leaflet-geojson-pointtolayer/ 
 
+  // earthquakes.addTo(myMap);
   earthquakes.addTo(myMap);
 });
-
 
 // Another good example is Day 3 Citibike; above is a more linear version of the code that does not include all the functions.
 // Just like onEachFeature, there are other options that can be included, see the documentation
@@ -138,4 +146,5 @@ d3.json(queryUrl).then(function(data) {
 
 // IF there are more data to be added and it is unrelated to first data set then steps 7-9 can be mimicked.
 // Always check the data to see what type of json data it is.  L.geoJson() will map whatever geometries found in a
-// json or geojson file.  If it is a geometry.type of polygon then it will be an enclosed shape; if it is a Linestring then it will be multiple lines connected, etc.
+// json or geojson file.  If it is a geometry.type of polygon then it will be an enclosed shape; if it is a Linestring then it will be multiple lines connected, etc
+
