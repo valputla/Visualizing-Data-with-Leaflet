@@ -81,12 +81,12 @@ L.control.layers(baseMaps, overlayMaps, {
 
 
 function getColor(d) {
-  return d > 3.0 ? '#810f7c' :
-         d > 2.0  ? '#8856a7' :
-         d > 1.5  ? '#8c96c6' :
-         d > 1.0  ? '#9ebcda' :
-         d > 0.5   ? '#bfd3e6' :
-                    '#edf8fb';
+  return d > 90 ? '#b10026' :
+         d > 70  ? '#fd8d3c' :
+         d > 50  ? '#fee391' :
+         d > 30  ? '#a1d99b' :
+         d > 10   ? '#41ab5d' :
+                    '#005a32';
 }
 
 
@@ -107,7 +107,7 @@ d3.json(queryUrl).then(function(data) {
   geojsonLayer = L.geoJSON(data, {
     style: function(feature) {
       return {
-        fillColor: getColor(feature.properties.mag),
+        fillColor: getColor(feature.geometry.coordinates[2]),
         weight: 2,
         opacity: 1,
         color: 'grey',
@@ -116,7 +116,7 @@ d3.json(queryUrl).then(function(data) {
     },
     pointToLayer: function(feature, latlng) {
       return new L.CircleMarker(latlng, {
-        radius: 10, 
+        radius: feature.properties.mag * 5, 
         fillOpacity: 0.85
       });
   },
