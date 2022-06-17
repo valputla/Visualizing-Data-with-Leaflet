@@ -81,12 +81,12 @@ L.control.layers(baseMaps, overlayMaps, {
 
 
 function getColor(d) {
-  return d > 90 ? '#b10026' :
-         d > 70  ? '#fd8d3c' :
-         d > 50  ? '#fee391' :
-         d > 30  ? '#a1d99b' :
-         d > 10   ? '#41ab5d' :
-                    '#005a32';
+  return d > 90 ? '#d73027' :
+         d > 70  ? '#fc8d59' :
+         d > 50  ? '#fee08b' :
+         d > 30  ? '#d9ef8b' :
+         d > 10   ? '#91cf60' :
+                    '#1a9850';
 }
 
 
@@ -108,10 +108,10 @@ d3.json(queryUrl).then(function(data) {
     style: function(feature) {
       return {
         fillColor: getColor(feature.geometry.coordinates[2]),
-        weight: 2,
+        weight: 1,
         opacity: 1,
-        color: 'grey',
-        fillOpacity: 0.7
+        color: 'black',
+        fillOpacity: 0.9
       };
     },
     pointToLayer: function(feature, latlng) {
