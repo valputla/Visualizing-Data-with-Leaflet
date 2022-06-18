@@ -31,6 +31,7 @@ The United States Geological Survey (USGS) provides data about various natural d
 
 ## Data Source
 JSON data accessed from: https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson
+
 The United States Geological Survey (USGS) JSON files: https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
 
 
